@@ -1,14 +1,19 @@
 ## Overview
 
-Generate deterministic, SVG-only avatars (Beam, Bauhaus, Marble, Pixel, Ring and Sunset) in Go - ready for
+<p align="center">
+  <img src=".github/assets/example.png" width="800" />
+</p>
+
+Generate deterministic, SVG-only Boring Avatars (Beam, Bauhaus, Marble, Pixel, Ring and Sunset) in Go - ready for
 servers, CDNs, CLI tools or front-ends.
 
 > Credit where it's due - this port would not exist without the original, beautifully crafted
 > JavaScript project by Boring Designers: https://github.com/boringdesigners/boring-avatars/tree/master
+> Please consider supporting their project with a star and a donation!
 
 ## Features
 
-- Six sleek styles identical to the JS reference. Same familiar API as the JS implementation.
+- Six sleek Boring Avatar styles.
 - Deterministic: same (style, name, palette) -> identical SVG.
 - Plug-and-play HTTP server with Chi + functional middleware options.
 
