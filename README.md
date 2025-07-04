@@ -92,8 +92,8 @@ You can run the bundled server on your own, or you can use the paid service the 
 already provide:
 https://boringavatars.com/api-service
 
-Their team handles all the setup and heavy lifting for your endpoint, so you can go back to doing the important stuff (
-building your app!).
+Their team handles all the setup and heavy lifting for your endpoint, so you can go back to doing the important stuff
+(building your app!).
 
 #### Base endpoint
 
