@@ -75,7 +75,7 @@ func BuildBeamParams(id int, palette Palette) Params {
 }
 
 // GenerateBeam returns a beam-style avatar SVG
-func GenerateBeam(name string, palette Palette, px int, square bool) string {
+func GenerateBeam(name string, palette Palette, size int, square bool) string {
 	var (
 		id     = NameToID(name)
 		params = BuildBeamParams(id, palette)
@@ -85,17 +85,16 @@ func GenerateBeam(name string, palette Palette, px int, square bool) string {
 	// Start building out the SVG
 	var b strings.Builder
 
-	if px > 0 {
+	if size > 0 {
 		// Custom size
 		_, _ = fmt.Fprintf(
 			&b,
 			`<svg viewBox="0 0 %d %d" fill="none" role="img"`+
 				` xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">`,
 			BeamSize, BeamSize,
-			px, px,
+			size, size,
 		)
 	} else {
-		//
 		_, _ = fmt.Fprintf(
 			&b,
 			`<svg viewBox="0 0 %d %d" fill="none" role="img"`+
