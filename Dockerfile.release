@@ -1,6 +1,6 @@
 FROM scratch
 
-COPY boring-avatars-go /
-ENTRYPOINT [ "/boring-avatars-go" ]
+COPY server /
+ENTRYPOINT [ "/server" ]
 
 CMD [ "serve" ]
