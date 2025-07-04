@@ -1,0 +1,6 @@
+FROM scratch
+
+COPY boring-avatars-go /
+ENTRYPOINT [ "/boring-avatars-go" ]
+
+CMD [ "serve" ]
