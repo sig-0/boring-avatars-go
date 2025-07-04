@@ -2,14 +2,15 @@ package avatars
 
 import (
 	"errors"
-	"fmt"
 )
 
 var ErrUnknownStyle = errors.New("unknown style")
 
 type (
 	// Style represents a distinct avatar style
-	Style   string
+	Style string
+
+	// Palette is the hex color palette
 	Palette []string
 )
 
@@ -33,21 +34,29 @@ func Generate(
 	palette Palette,
 	size int,
 	square bool,
-) (string, error) {
+) string {
 	switch style {
 	case Beam:
-		return GenerateBeam(name, palette, size, square), nil
+		return GenerateBeam(name, palette, size, square)
 	case Bauhaus:
-		return GenerateBauhaus(name, palette, size, square), nil
-	case Marble:
-		return GenerateMarble(name, palette, size, square), nil
+		return GenerateBauhaus(name, palette, size, square)
 	case Pixel:
-		return GeneratePixel(name, palette, size, square), nil
+		return GeneratePixel(name, palette, size, square)
 	case Ring:
-		return GenerateRing(name, palette, size, square), nil
+		return GenerateRing(name, palette, size, square)
 	case Sunset:
-		return GenerateSunset(name, palette, size, square), nil
+		return GenerateSunset(name, palette, size, square)
 	default:
-		return "", fmt.Errorf("%w: %q", ErrUnknownStyle, style)
+		return GenerateMarble(name, palette, size, square)
+	}
+}
+
+// ValidStyle checks if the style is a valid boring avatar variant
+func ValidStyle(style Style) bool {
+	switch style {
+	case Beam, Bauhaus, Marble, Pixel, Ring, Sunset:
+		return true
+	default:
+		return false
 	}
 }
