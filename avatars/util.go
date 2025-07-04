@@ -27,7 +27,7 @@ func NameToID(name string) int {
 }
 
 // IDToDigit returns the digit at 10^place in id
-func IDToDigit(id int, place int) int {
+func IDToDigit(id, place int) int {
 	for i := 0; i < place; i++ {
 		id /= 10
 	}
@@ -36,12 +36,12 @@ func IDToDigit(id int, place int) int {
 }
 
 // IDToBoolean returns whether that digit is even
-func IDToBoolean(id int, place int) bool {
+func IDToBoolean(id, place int) bool {
 	return IDToDigit(id, place)%2 == 0
 }
 
 // IDToPoint returns id%mod, negated when that digit is even and place > 0
-func IDToPoint(id int, mod, place int) int {
+func IDToPoint(id, mod, place int) int {
 	v := id % mod
 	if place > 0 && IDToDigit(id, place)%2 == 0 {
 		return -v

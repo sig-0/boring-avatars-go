@@ -1,0 +1,125 @@
+version: "2"
+run:
+  concurrency: 8
+  go: ""
+  modules-download-mode: readonly
+  tests: true
+  allow-parallel-runners: false
+output:
+  path-prefix: ""
+linters:
+  default: none
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - decorder
+    - dogsled
+    - dupl
+    - durationcheck
+    - errcheck
+    - errname
+    - errorlint
+    - gocheckcompilerdirectives
+    - gochecknoinits
+    - goconst
+    - gocritic
+    - godot
+    - gomoddirectives
+    - gosec
+    - govet
+    - importas
+    - ineffassign
+    - lll
+    - loggercheck
+    - makezero
+    - misspell
+    - nakedret
+    - nestif
+    - nilerr
+    - nilnil
+    - nlreturn
+    - nolintlint
+    - nonamedreturns
+    - prealloc
+    - predeclared
+    - promlinter
+    - reassign
+    - revive
+    - staticcheck
+    - tagliatelle
+    - testableexamples
+    - thelper
+    - tparallel
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+    - wastedassign
+    - whitespace
+    - wsl_v5
+  settings:
+    wsl_v5:
+      allow-first-in-block: true
+      allow-whole-block: false
+      branch-max-lines: 2
+    errcheck:
+      check-type-assertions: false
+      check-blank: true
+      exclude-functions:
+        - io.WriteString
+        - strconv.ParseInt
+    goconst:
+      min-len: 3
+      min-occurrences: 3
+    gocritic:
+      disabled-checks:
+        - hugeParam
+        - rangeExprCopy
+        - rangeValCopy
+        - importShadow
+        - unnamedResult
+      enabled-tags:
+        - diagnostic
+        - experimental
+        - opinionated
+        - performance
+        - style
+    godot:
+      scope: all
+      period: false
+    govet:
+      enable-all: true
+    nakedret:
+      max-func-lines: 1
+    tagliatelle:
+      case:
+        rules:
+          json: goCamel
+          yaml: goCamel
+        use-field-name: true
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - gosec
+          - nilnil
+        path: (.+)_test.go
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  new: false
+  fix: false
+formatters:
+  enable:
+    - gofmt
+    - gofumpt
+    - goimports
+  settings:
+    gofmt:
+      simplify: true

@@ -89,14 +89,13 @@ func (c *serveCfg) exec(ctx context.Context, _ []string) error {
 		return fmt.Errorf("unable to create server, %w", err)
 	}
 
-	runCtx, cancelFn :=
-		signal.NotifyContext(
-			ctx,
-			os.Interrupt,
-			syscall.SIGINT,
-			syscall.SIGTERM,
-			syscall.SIGQUIT,
-		)
+	runCtx, cancelFn := signal.NotifyContext(
+		ctx,
+		os.Interrupt,
+		syscall.SIGINT,
+		syscall.SIGTERM,
+		syscall.SIGQUIT,
+	)
 
 	defer cancelFn()
 

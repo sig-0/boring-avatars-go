@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/hex"
+	"fmt"
 	"io"
 	"net/http"
 	"strconv"
@@ -31,7 +32,7 @@ func avatarHandler(w http.ResponseWriter, r *http.Request) {
 	name := q.Get(nameParam)
 	if name == "" {
 		// No name provided, generate a random avatar
-		name = strconv.FormatInt(time.Now().UnixNano(), 36)
+		name = fmt.Sprintf("%d", time.Now().UnixNano())
 	}
 
 	// Fetch the variant
@@ -48,9 +49,9 @@ func avatarHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Fetch the size
 	size := defaultSize
+
 	if sz := q.Get(sizeParam); sz != "" {
 		n, err := strconv.Atoi(sz)
-
 		if err != nil || n <= 0 || n > 512 { // TODO expose this in the config
 			http.Error(w, "invalid size (1-512)", http.StatusBadRequest)
 
