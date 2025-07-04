@@ -13,7 +13,7 @@ const (
 // buildRingColors creates the 9-entry color list:
 //   - first generates 5 shuffled colors based on successive offsets,
 //   - then fans them out into the fixed 9-slot pattern used by the SVG paths
-func buildRingColors(id int, palette Palette) []string {
+func buildRingColors(id int, palette Palette) Palette {
 	if len(palette) == 0 {
 		palette = DefaultPalette
 	}

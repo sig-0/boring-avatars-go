@@ -82,6 +82,7 @@ func GenerateBauhaus(name string, palette Palette, size int, square bool) string
 		maskID,
 		BauhausSize, BauhausSize,
 	)
+
 	if square {
 		_, _ = fmt.Fprintf(
 			&b,
