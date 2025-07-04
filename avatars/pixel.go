@@ -6,9 +6,8 @@ import (
 )
 
 const (
-	PixelSize     = 80
+	pixelSize     = 80
 	pixelElements = 64 // 8x8 grid
-	pixelStep     = 10 // each "pixel" is 10 px
 )
 
 // buildPixelColors returns the 64 palette entries used in the grid
@@ -44,7 +43,7 @@ func GeneratePixel(name string, palette Palette, size int, square bool) string {
 			&b,
 			`<svg viewBox="0 0 %d %d" fill="none" role="img"`+
 				` xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">`,
-			PixelSize, PixelSize,
+			pixelSize, pixelSize,
 			size, size,
 		)
 	} else {
@@ -52,7 +51,7 @@ func GeneratePixel(name string, palette Palette, size int, square bool) string {
 			&b,
 			`<svg viewBox="0 0 %d %d" fill="none" role="img"`+
 				` xmlns="http://www.w3.org/2000/svg">`,
-			PixelSize, PixelSize,
+			pixelSize, pixelSize,
 		)
 	}
 
@@ -61,21 +60,21 @@ func GeneratePixel(name string, palette Palette, size int, square bool) string {
 		&b,
 		`<mask id="%s" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="%d" height="%d">`,
 		maskID,
-		PixelSize, PixelSize,
+		pixelSize, pixelSize,
 	)
 
 	if square {
 		_, _ = fmt.Fprintf(
 			&b,
 			`<rect width="%d" height="%d" fill="#FFFFFF"/>`,
-			PixelSize, PixelSize,
+			pixelSize, pixelSize,
 		)
 	} else {
 		_, _ = fmt.Fprintf(
 			&b,
 			`<rect width="%d" height="%d" rx="%d" fill="#FFFFFF"/>`,
-			PixelSize, PixelSize,
-			PixelSize*2,
+			pixelSize, pixelSize,
+			pixelSize*2,
 		)
 	}
 
@@ -111,7 +110,7 @@ func GeneratePixel(name string, palette Palette, size int, square bool) string {
 
 	// The remaining rows, column by column (y = 10..70)
 	for _, x := range cols {
-		for y := 10; y < PixelSize; y += 10 {
+		for y := 10; y < pixelSize; y += 10 {
 			writePixel(x, y, colors[idx])
 
 			idx++

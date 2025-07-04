@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	RingSize    = 90
+	ringSize    = 90
 	ringShuffle = 5
 )
 
@@ -53,7 +53,7 @@ func GenerateRing(name string, palette Palette, size int, square bool) string {
 			&b,
 			`<svg viewBox="0 0 %d %d" fill="none" role="img"`+
 				` xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">`,
-			RingSize, RingSize,
+			ringSize, ringSize,
 			size, size,
 		)
 	} else {
@@ -61,7 +61,7 @@ func GenerateRing(name string, palette Palette, size int, square bool) string {
 			&b,
 			`<svg viewBox="0 0 %d %d" fill="none" role="img"`+
 				` xmlns="http://www.w3.org/2000/svg">`,
-			RingSize, RingSize,
+			ringSize, ringSize,
 		)
 	}
 
@@ -70,21 +70,21 @@ func GenerateRing(name string, palette Palette, size int, square bool) string {
 		&b,
 		`<mask id="%s" maskUnits="userSpaceOnUse" x="0" y="0" width="%d" height="%d">`,
 		maskID,
-		RingSize, RingSize,
+		ringSize, ringSize,
 	)
 
 	if square {
 		_, _ = fmt.Fprintf(
 			&b,
 			`<rect width="%d" height="%d" fill="#FFFFFF"/>`,
-			RingSize, RingSize,
+			ringSize, ringSize,
 		)
 	} else {
 		_, _ = fmt.Fprintf(
 			&b,
 			`<rect width="%d" height="%d" rx="%d" fill="#FFFFFF"/>`,
-			RingSize, RingSize,
-			RingSize*2,
+			ringSize, ringSize,
+			ringSize*2,
 		)
 	}
 

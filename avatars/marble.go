@@ -6,36 +6,36 @@ import (
 )
 
 const (
-	MarbleSize     = 80
+	marbleSize     = 80
 	marbleElements = 3
 )
 
-// MarbleElement stores the params
-type MarbleElement struct {
-	Color                  string
-	TranslateX, TranslateY float64
-	Scale                  float64
-	Rotate                 int
+// marbleElement stores the params
+type marbleElement struct {
+	color                  string
+	translateX, translateY float64
+	scale                  float64
+	rotate                 int
 }
 
 // buildMarbleElements deterministically derives all element values
-func buildMarbleElements(id int, palette Palette) []MarbleElement {
+func buildMarbleElements(id int, palette Palette) []marbleElement {
 	if len(palette) == 0 {
 		palette = DefaultPalette
 	}
 
-	elements := make([]MarbleElement, marbleElements)
+	elements := make([]marbleElement, marbleElements)
 
 	for i := 0; i < marbleElements; i++ {
 		n := id + i
 		m := id * (i + 1)
 
-		elements[i] = MarbleElement{
-			Color:      palette[n%len(palette)],
-			TranslateX: float64(IDToPoint(m, MarbleSize/10, 1)),
-			TranslateY: float64(IDToPoint(m, MarbleSize/10, 2)),
-			Scale:      1.2 + float64(IDToPoint(m, MarbleSize/20, 0))/10.0,
-			Rotate:     IDToPoint(m, 360, 1),
+		elements[i] = marbleElement{
+			color:      palette[n%len(palette)],
+			translateX: float64(IDToPoint(m, marbleSize/10, 1)),
+			translateY: float64(IDToPoint(m, marbleSize/10, 2)),
+			scale:      1.2 + float64(IDToPoint(m, marbleSize/20, 0))/10.0,
+			rotate:     IDToPoint(m, 360, 1),
 		}
 	}
 
@@ -49,7 +49,7 @@ func GenerateMarble(name string, palette Palette, size int, square bool) string 
 		props    = buildMarbleElements(id, palette)
 		maskID   = fmt.Sprintf("mask_marble_%d", id)
 		filterID = "filter_" + maskID
-		center   = MarbleSize / 2
+		center   = marbleSize / 2
 	)
 
 	// Start building out the SVG
@@ -61,7 +61,7 @@ func GenerateMarble(name string, palette Palette, size int, square bool) string 
 			&b,
 			`<svg viewBox="0 0 %d %d" fill="none" role="img"`+
 				` xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">`,
-			MarbleSize, MarbleSize,
+			marbleSize, marbleSize,
 			size, size,
 		)
 	} else {
@@ -69,7 +69,7 @@ func GenerateMarble(name string, palette Palette, size int, square bool) string 
 			&b,
 			`<svg viewBox="0 0 %d %d" fill="none" role="img"`+
 				` xmlns="http://www.w3.org/2000/svg">`,
-			MarbleSize, MarbleSize,
+			marbleSize, marbleSize,
 		)
 	}
 
@@ -78,21 +78,21 @@ func GenerateMarble(name string, palette Palette, size int, square bool) string 
 		&b,
 		`<mask id="%s" maskUnits="userSpaceOnUse" x="0" y="0" width="%d" height="%d">`,
 		maskID,
-		MarbleSize, MarbleSize,
+		marbleSize, marbleSize,
 	)
 
 	if square {
 		_, _ = fmt.Fprintf(
 			&b,
 			`<rect width="%d" height="%d" fill="#FFFFFF"/>`,
-			MarbleSize, MarbleSize,
+			marbleSize, marbleSize,
 		)
 	} else {
 		_, _ = fmt.Fprintf(
 			&b,
 			`<rect width="%d" height="%d" rx="%d" fill="#FFFFFF"/>`,
-			MarbleSize, MarbleSize,
-			MarbleSize*2,
+			marbleSize, marbleSize,
+			marbleSize*2,
 		)
 	}
 
@@ -105,8 +105,8 @@ func GenerateMarble(name string, palette Palette, size int, square bool) string 
 	_, _ = fmt.Fprintf(
 		&b,
 		`<rect width="%d" height="%d" fill="%s"/>`,
-		MarbleSize, MarbleSize,
-		props[0].Color,
+		marbleSize, marbleSize,
+		props[0].color,
 	)
 
 	// First path
@@ -116,10 +116,10 @@ func GenerateMarble(name string, palette Palette, size int, square bool) string 
 			` fill="%s"`+
 			` transform="translate(%.2f %.2f) rotate(%d %d %d) scale(%.2f)"/>`,
 		filterID,
-		props[1].Color,
-		props[1].TranslateX, props[1].TranslateY,
-		props[1].Rotate, center, center,
-		props[2].Scale,
+		props[1].color,
+		props[1].translateX, props[1].translateY,
+		props[1].rotate, center, center,
+		props[2].scale,
 	)
 
 	// Second path
@@ -130,10 +130,10 @@ func GenerateMarble(name string, palette Palette, size int, square bool) string 
 			` fill="%s"`+
 			` transform="translate(%.2f %.2f) rotate(%d %d %d) scale(%.2f)"/>`,
 		filterID,
-		props[2].Color,
-		props[2].TranslateX, props[2].TranslateY,
-		props[2].Rotate, center, center,
-		props[2].Scale,
+		props[2].color,
+		props[2].translateX, props[2].translateY,
+		props[2].rotate, center, center,
+		props[2].scale,
 	)
 
 	// Close group

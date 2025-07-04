@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	SunsetSize     = 80
+	sunsetSize     = 80
 	sunsetElements = 4
 )
 
@@ -41,7 +41,7 @@ func GenerateSunset(name string, palette Palette, size int, square bool) string 
 			&b,
 			`<svg viewBox="0 0 %d %d" fill="none" role="img"`+
 				` xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">`,
-			SunsetSize, SunsetSize,
+			sunsetSize, sunsetSize,
 			size, size,
 		)
 	} else {
@@ -49,7 +49,7 @@ func GenerateSunset(name string, palette Palette, size int, square bool) string 
 			&b,
 			`<svg viewBox="0 0 %d %d" fill="none" role="img"`+
 				` xmlns="http://www.w3.org/2000/svg">`,
-			SunsetSize, SunsetSize,
+			sunsetSize, sunsetSize,
 		)
 	}
 
@@ -57,21 +57,21 @@ func GenerateSunset(name string, palette Palette, size int, square bool) string 
 	_, _ = fmt.Fprintf(&b,
 		`<mask id="%s" maskUnits="userSpaceOnUse" x="0" y="0" width="%d" height="%d">`,
 		maskID,
-		SunsetSize, SunsetSize,
+		sunsetSize, sunsetSize,
 	)
 
 	if square {
 		_, _ = fmt.Fprintf(
 			&b,
 			`<rect width="%d" height="%d" fill="#FFFFFF"/>`,
-			SunsetSize, SunsetSize,
+			sunsetSize, sunsetSize,
 		)
 	} else {
 		_, _ = fmt.Fprintf(
 			&b,
 			`<rect width="%d" height="%d" rx="%d" fill="#FFFFFF"/>`,
-			SunsetSize, SunsetSize,
-			SunsetSize*2,
+			sunsetSize, sunsetSize,
+			sunsetSize*2,
 		)
 	}
 
@@ -107,9 +107,9 @@ func GenerateSunset(name string, palette Palette, size int, square bool) string 
 			`<stop offset="1" stop-color="%s"/>`+
 			`</linearGradient>`+
 			`</defs>`,
-		id, SunsetSize/2, SunsetSize/2, SunsetSize/2, // first gradient
+		id, sunsetSize/2, sunsetSize/2, sunsetSize/2, // first gradient
 		colors[0], colors[1],
-		id, SunsetSize/2, SunsetSize/2, SunsetSize/2, SunsetSize, // second gradient
+		id, sunsetSize/2, sunsetSize/2, sunsetSize/2, sunsetSize, // second gradient
 		colors[2], colors[3],
 	)
 
