@@ -34,17 +34,14 @@ archives:
 
 signs:
   - cmd: cosign
-    env:
-      - COSIGN_EXPERIMENTAL=1
-    certificate: '${artifact}.sigstore.json'
+    signature: "${artifact}.sigstore.json"
     artifacts: checksum
     output: true
     args:
       - sign-blob
-      - '--output-signature=${signature}'
-      - '--bundle=${certificate}'
-      - '${artifact}'
-      - '--yes'
+      - "--bundle=${signature}"
+      - "${artifact}"
+      - "--yes" # non-interactive
 
 dockers:
   # https://goreleaser.com/customization/docker/
@@ -120,14 +117,12 @@ docker_manifests:
 
 docker_signs:
   - cmd: cosign
-    env:
-      - COSIGN_EXPERIMENTAL=1
     artifacts: images
     output: true
     args:
-      - 'sign'
-      - '${artifact}'
-      - "--yes" # needed on cosign 2.0.0+
+      - "sign"
+      - "${artifact}@${digest}"
+      - "--yes"
 
 checksum:
   name_template: 'checksums.txt'
