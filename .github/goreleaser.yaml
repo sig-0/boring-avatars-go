@@ -1,3 +1,5 @@
+version: 2
+
 project_name: boring-avatars-go
 
 before:
@@ -34,15 +36,15 @@ signs:
   - cmd: cosign
     env:
       - COSIGN_EXPERIMENTAL=1
-    certificate: '${artifact}.pem'
-    args:
-      - sign-blob
-      - '--output-certificate=${certificate}'
-      - '--output-signature=${signature}'
-      - '${artifact}'
-      - "--yes" # needed on cosign 2.0.0+
+    certificate: '${artifact}.sigstore.json'
     artifacts: checksum
     output: true
+    args:
+      - sign-blob
+      - '--output-signature=${signature}'
+      - '--bundle=${certificate}'
+      - '${artifact}'
+      - '--yes'
 
 dockers:
   # https://goreleaser.com/customization/docker/
@@ -100,6 +102,7 @@ dockers:
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
+
 docker_manifests:
   # https://goreleaser.com/customization/docker_manifest/
   - name_template: ghcr.io/sig-0/{{ .ProjectName }}:{{ .Version }}
