@@ -3,8 +3,8 @@ module github.com/sig-0/boring-avatars-go
 go 1.24.4
 
 require (
-	github.com/go-chi/chi/v5 v5.2.4
-	github.com/go-chi/httplog/v3 v3.3.0
+	github.com/go-chi/chi/v5 v5.3.0
+	github.com/go-chi/httplog/v3 v3.4.0
 	github.com/pelletier/go-toml v1.9.5
 	github.com/peterbourgon/ff/v3 v3.4.0
 	github.com/rs/cors v1.11.1
